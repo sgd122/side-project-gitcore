@@ -2,7 +2,6 @@
 
 * Copyright &copy; 2021
 * Author: Gidong Seong
-* Licensed under the Apache License.
 
 
 ## Description ##
