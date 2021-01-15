@@ -2,6 +2,7 @@
 
 * Copyright &copy; 2021
 * Author: Gidong Seong
+* Licensed under the terms of the MIT License.
 
 
 ## Description ##
