@@ -8,11 +8,3 @@ from .serializers import UserSerializer
 class LoginViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
-
-class LoginView(APIView):
-    def get(self):
-        pass
-
-    def post(self):
-        pass
