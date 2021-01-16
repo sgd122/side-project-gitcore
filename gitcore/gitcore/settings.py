@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     # Thire Party
     'corsheaders',
     'rest_framework',
-    'rest_framework_swagger',
+    'drf_yasg',
     # App
     'app',
     "users.apps.UsersConfig",
@@ -131,3 +131,7 @@ STATIC_URL = '/static/'
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost"]
 
 AUTH_USER_MODEL = "users.User"
+
+REST_FRAMEWORK = {
+
+}

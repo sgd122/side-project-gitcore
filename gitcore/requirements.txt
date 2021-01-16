@@ -1,4 +1,4 @@
 django~=3.1.4
 django-cors-headers
 djangorestframework>=3.12.2
-django-rest-swagger
+drf-yasg
