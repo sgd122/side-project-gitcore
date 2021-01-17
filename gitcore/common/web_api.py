@@ -1,4 +1,8 @@
+import base64
+from datetime import datetime
+
 import requests, json
+from django.utils.dateformat import DateFormat
 
 
 def github_request(method_name, url, dict_data=None, is_urlencoded=True):
@@ -31,6 +35,15 @@ def github_user_info(user_id: str):
     사용자의 Github 정보를 가져온다.
     """
     url = '/users/%s' % (user_id)
+    data = github_request(method_name="GET", url=url)
+    return data
+
+
+def github_user_events(user_id: str):
+    """
+    사용자의 Github event 정보를 가져온다.
+    """
+    url = '/users/%s/events' % (user_id)
     data = github_request(method_name="GET", url=url)
     return data
 
@@ -77,4 +90,43 @@ def github_pr_get(user_id: str, repo: str, pull_number: str):
     """
     url = '/repos/%s/%s/pulls/%s' % (user_id, repo, pull_number)
     data = github_request(method_name="GET", url=url)
+    return data
+
+
+def github_push_to_github(filename, repo, branch, token):
+    url="https://api.github.com/repos/"+repo+"/contents/"+filename
+
+    base64content=base64.b64encode(open(filename, "rb").read())
+
+    data = requests.get(url+'?ref='+branch, headers = {"Authorization": "token "+token}).json()
+    sha = data['sha']
+
+    if base64content.decode('utf-8')+"\n" != data['content']:
+        message = json.dumps({"message":"update",
+                            "branch": branch,
+                            "content": base64content.decode("utf-8") ,
+                            "sha": sha
+                            })
+
+        resp=requests.put(url, data = message, headers = {"Content-Type": "application/json", "Authorization": "token "+token})
+
+        print(resp)
+    else:
+        print("nothing to update")
+
+
+def github_today_commit(user_id: str):
+    """
+    사용자의 오늘 Github Event 목록을 확인합니다.
+    """
+    repo_list = github_user_events(user_id=user_id)
+    today = DateFormat(datetime.now()).format('Ymd')
+    type_list = ["WatchEvent", "IssuesEvent"]
+    data = []
+    for repo in repo_list.get("data"):
+        v_type = repo.get("type")
+        v_created_at = DateFormat(datetime.strptime(repo.get("created_at"), "%Y-%m-%dT%H:%M:%SZ").date()).format('Ymd')
+        if v_type not in type_list:
+            if v_created_at == today:
+                data.append(repo)
     return data

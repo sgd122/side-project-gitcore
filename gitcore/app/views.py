@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from common.web_api import github_request, github_user_info, github_repo_list, github_pr_create, github_pr_list, \
-    github_pr_get, github_orgs_repo_list
+from common.web_api import github_user_info, github_repo_list, github_pr_create, github_pr_list, \
+    github_pr_get, github_orgs_repo_list, github_user_events, github_today_commit
 
 
 class UserInformationView(APIView):
@@ -13,12 +13,30 @@ class UserInformationView(APIView):
         return Response(data)
 
 
+class UserEventsView(APIView):
+    """
+    사용자의 Github event 정보를 가져온다.
+    """
+    def get(self, request, user_id):
+        data = github_user_events(user_id=user_id)
+        return Response(data)
+
+
 class UserReposView(APIView):
     """
     사용자의 Repository 목록을 가져온다.
     """
     def get(self, request, user_id):
         data = github_repo_list(user_id=user_id)
+        return Response(data)
+
+
+class UserTodayView(APIView):
+    """
+    사용자의 오늘 Github Event 목록을 확인합니다.
+    """
+    def get(self, request, user_id):
+        data = github_today_commit(user_id=user_id)
         return Response(data)
 
 
