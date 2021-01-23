@@ -1,3 +1,15 @@
 from django.shortcuts import render
+from rest_framework import viewsets
+from rest_framework.views import APIView
+from .models import Team, TeamGroup
+from .serializers import TeamSerializer, TeamGroupSerializer
 
-# Create your views here.
+
+class TeamViewSet(viewsets.ModelViewSet):
+    queryset = Team.objects.all()
+    serializer_class = TeamSerializer
+
+
+class TeamGroupViewSet(viewsets.ModelViewSet):
+    queryset = TeamGroup.objects.all()
+    serializer_class = TeamGroupSerializer

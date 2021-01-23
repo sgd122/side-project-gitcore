@@ -23,4 +23,5 @@ urlpatterns = [
     re_path(r'^docs/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path("app/", include("app.urls")),
     path("users/", include("users.urls")),
+    path("teams/", include("teams.urls")),
 ]
