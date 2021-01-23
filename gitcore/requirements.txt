@@ -4,3 +4,4 @@ djangorestframework>=3.12.2
 drf-yasg
 drf-jwt
 social-auth-app-django
+django-environ
