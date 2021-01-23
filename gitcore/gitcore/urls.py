@@ -23,8 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^docs(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     re_path(r'^docs/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api-token-auth/', obtain_auth_token),  # token 인증용
 
     path('api-jwt-auth/', obtain_jwt_token),
     path('api-jwt-auth/refresh/', refresh_jwt_token),
