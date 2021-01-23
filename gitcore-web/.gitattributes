@@ -1,0 +1,52 @@
+*                   text=auto
+
+*.css               text
+*.htm               text diff=html
+*.html              text diff=html
+*.js                text
+*.json              text
+*.jsx               text
+*.map               text -diff
+*.sass              text
+*.scss              text diff=css
+*.ts                text
+*.tsx               text
+
+*.sh                text eol=lf
+*.bash              text eol=lf
+*.bat               text eol=crlf
+*.cmd               text eol=crlf
+
+*.png               binary
+*.jpg               binary
+*.jpeg              binary
+*.ico               binary
+*.svg               text
+
+*.lock              text -diff
+package-lock.json   text -diff
+
+*.md                text
+*.txt               text
+AUTHORS             text
+CHANGELOG           text
+CHANGES             text
+CONTRIBUTING        text
+COPYING             text
+COPYRIGHT           text
+LICENSE             text
+*README*            text
+
+.editorconfig       text
+.env                text
+.eslintcache        text
+.gitattributes      text
+.gitconfig          text
+
+.*rc                text
+.*rc.*              text
+.*ignore            text
+
+.gitattributes      export-ignore
+.gitignore          export-ignore
+.gitkeep            export-ignore
