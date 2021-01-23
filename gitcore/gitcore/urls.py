@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework import permissions
@@ -27,6 +28,8 @@ urlpatterns = [
     path('api-jwt-auth/', obtain_jwt_token),
     path('api-jwt-auth/refresh/', refresh_jwt_token),
     path('api-jwt-auth/verify/', verify_jwt_token),
+
+    url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
 
     path("app/", include("app.urls")),
     path("users/", include("users.urls")),
