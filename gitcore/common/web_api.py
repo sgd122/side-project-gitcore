@@ -94,8 +94,12 @@ def github_pr_get(user_id: str, repo: str, pull_number: str):
 
 
 def github_push_to_github(filename, repo, branch, token):
+    """
+    github commit을 만든다.
+    """
+    # TODO: download_url을 통해서 파일을 가져와서 commit을 하는 방향??
+    # TODO: github accesskey를 발급받아야 하는지 여부 파악??
     url="https://api.github.com/repos/"+repo+"/contents/"+filename
-
     base64content=base64.b64encode(open(filename, "rb").read())
 
     data = requests.get(url+'?ref='+branch, headers = {"Authorization": "token "+token}).json()
@@ -129,4 +133,8 @@ def github_today_commit(user_id: str):
         if v_type not in type_list:
             if v_created_at == today:
                 data.append(repo)
-    return data
+
+    dict_meta = {'status_code' : repo_list.get("status_code"), 'ok': repo_list.get("ok"), 'encoding': repo_list.get("encoding"),
+                 'Content-Type': repo_list.get('Content-Type')}
+
+    return {**dict_meta, **{'data': data}}
