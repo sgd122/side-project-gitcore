@@ -28,6 +28,8 @@ urlpatterns = [
     path('api-jwt-auth/refresh/', refresh_jwt_token),
     path('api-jwt-auth/verify/', verify_jwt_token),
 
+    path(r'^auth/', include('rest_framework_social_oauth2.urls')),
+
     path("app/", include("app.urls")),
     path("users/", include("users.urls")),
     path("teams/", include("teams.urls")),
